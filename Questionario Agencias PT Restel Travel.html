@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <title>Questionário Agências de Viagens - Restel Travel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #FAF7F8; /* fundo suave em tom Restel */
+      color: #5A5A5A;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 960px;
+      margin: 32px auto;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 24px 60px rgba(198, 40, 67, 0.15);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 24px 32px 18px;
+      background: linear-gradient(135deg, #C62843, #E2566D);
+      color: #FFFFFF;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 8px 0 6px;
+      font-size: 1.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    header p {
+      margin: 0;
+      max-width: 640px;
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .logo-wrap {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      opacity: 0.95;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 2px solid #FCE4EA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+    }
+
+    main {
+      padding: 24px 32px 28px;
+    }
+
+    .intro-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFFFFF22;
+      color: #FFFFFF;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border: 1px solid #FFFFFF44;
+    }
+
+    .intro-tag span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22C55E;
+    }
+
+    form {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .field-group {
+      padding: 16px 18px 18px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .field-group:hover {
+      border-color: #C62843;
+      box-shadow: 0 4px 18px rgba(198, 40, 67, 0.15);
+    }
+
+    .field-group h2 {
+      margin: 0 0 2px;
+      font-size: 1.02rem;
+    }
+
+    .field-group small {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    label {
+      font-size: 0.9rem;
+      display: block;
+      margin: 4px 0 4px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #C62843;
+      box-shadow: 0 0 0 1px rgba(198, 40, 67, 0.4);
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .inline {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .inline > div {
+      flex: 1 1 140px;
+    }
+
+    .radio-group,
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      margin-top: 4px;
+    }
+
+    .radio-option,
+    .checkbox-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    .radio-option input,
+    .checkbox-option input {
+      margin: 0;
+    }
+
+    .percent-input {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 4px 0;
+      font-size: 0.9rem;
+    }
+
+    .percent-input input {
+      max-width: 90px;
+    }
+
+    .percent-input span {
+      font-size: 0.9rem;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .submit-row {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      justify-content: flex-start;
+    }
+
+    button[type="submit"] {
+      border: none;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #C62843, #E2566D);
+      color: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button[type="submit"]:hover {
+      filter: brightness(1.07);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(198, 40, 67, 0.35);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 14px rgba(198, 40, 67, 0.25);
+    }
+
+    .required {
+      color: #ef4444;
+      margin-left: 4px;
+    }
+
+    .status-message {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      display: none;
+    }
+
+    .status-success {
+      color: #16a34a;
+    }
+
+    .status-error {
+      color: #b91c1c;
+    }
+
+    @media (max-width: 640px) {
+      header,
+      main {
+        padding: 18px 16px 20px;
+      }
+
+      .page {
+        margin: 16px;
+      }
+
+      .logo-wrap {
+        position: static;
+        margin-top: 10px;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="intro-tag">
+        <span class="dot"></span>
+        <span>Restel Travel · Agências</span>
+      </div>
+      <h1>Questionário rápido para Agências de Viagens</h1>
+      <p>
+        Ajude-nos a compreender melhor o posicionamento e as necessidades da sua agência.
+        Este formulário demora apenas <strong>2 minutos</strong> e permite-nos ajustar propostas,
+        condições e o apoio comercial da <strong>Restel Travel</strong>.
+      </p>
+      <div class="logo-wrap">
+        <div class="logo-mark">RT</div>
+        <span>RESTEL TRAVEL</span>
+      </div>
+    </header>
+
+    <main>
+      <form id="questionario-agencia" method="POST">
+        <!-- Dados da agência -->
+        <div class="field-group">
+          <h2>Dados da agência</h2>
+          <div class="inline">
+            <div>
+              <label for="nomeAgencia">Nome da agência</label>
+              <input type="text" id="nomeAgencia" name="Nome da agência" />
+            </div>
+            <div>
+              <label for="pessoaContacto">Pessoa de contacto</label>
+              <input type="text" id="pessoaContacto" name="Pessoa de contacto" />
+            </div>
+          </div>
+          <div class="inline">
+            <div>
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="Email" />
+            </div>
+            <div>
+              <label for="telefone">Telefone</label>
+              <input type="text" id="telefone" name="Telefone" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. Tempo de atuação no setor -->
+        <div class="field-group">
+          <h2>1. Há quanto tempo atua no setor do turismo e/ou experiência anterior?</h2>
+          <small>Responda de forma breve (anos de experiência, funções anteriores, etc.).</small>
+          <textarea id="experiencia" name="Experiência no setor" required></textarea>
+        </div>
+
+        <!-- 2. Conhece a Restel Travel -->
+        <div class="field-group">
+          <h2>2. Conhece a Restel Travel?<span class="required">*</span></h2>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="Conhece a Restel Travel" value="Sim" required />
+              <span>Sim</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="Conhece a Restel Travel" value="Não" />
+              <span>Não</span>
+            </label>
+          </div>
+          <label for="ondeConheceu">Se sim, onde conheceu?</label>
+          <input
+            type="text"
+            id="ondeConheceu"
+            name="Onde conheceu a Restel Travel"
+            placeholder="Ex.: Agência anterior, Grupo de gestão, convenção, recomendação, consórcio, etc."
+          />
+        </div>
+
+        <!-- 3. Número de colaboradores -->
+        <div class="field-group">
+          <h2>3. Número de colaboradores na agência?</h2>
+          <div class="inline">
+            <div>
+              <label for="numColaboradores">Número total</label>
+              <input type="number" id="numColaboradores" name="Número de colaboradores" min="0" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Home office ou loja física -->
+        <div class="field-group">
+          <h2>4. Trabalha em modo home office ou tem loja física?</h2>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="Tipo de operação" value="Home office" />
+              <span>Home office</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="Tipo de operação" value="Loja física" />
+              <span>Loja física</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="Tipo de operação" value="Modelo híbrido" />
+              <span>Modelo híbrido</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 5. Posicionamento da agência -->
+        <div class="field-group">
+          <h2>5. Como descreveria o posicionamento da sua agência?</h2>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="Posicionamento da agência" value="Generalista" />
+              <span>Generalista</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="Posicionamento da agência" value="Especializada" />
+              <span>Especializada</span>
+            </label>
+          </div>
+          <label for="especializacao">
+            Se assinalou especializada, indique destino(s), segmento(s) ou produto(s):
+          </label>
+          <textarea
+            id="especializacao"
+            name="Especialização (destinos/segmentos/produtos)"
+            placeholder="Ex.:viagens de Lazer, praia, grupos, viagens corporate, luxo, MICE, etc."
+          ></textarea>
+        </div>
+
+        <!-- 6. Destinos mais procurados -->
+        <div class="field-group">
+          <h2>6. Destinos mais procurados pelos seus clientes (aprox. em %)</h2>
+          <small>Indique a distribuição aproximada do volume de vendas por região.</small>
+
+          <div class="percent-input">
+            <span>Nacional (Portugal):</span>
+            <input type="number" id="nacional" name="Nacional (Portugal) (%)" min="0" max="100" />
+            <span>%</span>
+          </div>
+
+          <div class="percent-input">
+            <span>Europa:</span>
+            <input type="number" id="europa" name="Europa (%)" min="0" max="100" />
+            <span>%</span>
+          </div>
+
+          <label for="paisesEuropa">Que países mais destaca na Europa?</label>
+          <input
+            type="text"
+            id="paisesEuropa"
+            name="Países em destaque na Europa"
+            placeholder="Ex.: Espanha, Itália, França, etc."
+          />
+
+          <div class="percent-input">
+            <span>América do Sul:</span>
+            <input type="number" id="amsul" name="América do Sul (%)" min="0" max="100" />
+            <span>%</span>
+          </div>
+
+          <div class="percent-input">
+            <span>América do Norte:</span>
+            <input type="number" id="amnorte" name="América do Norte (%)" min="0" max="100" />
+            <span>%</span>
+          </div>
+
+          <div class="percent-input">
+            <span>África:</span>
+            <input type="number" id="africa" name="África (%)" min="0" max="100" />
+            <span>%</span>
+          </div>
+
+          <div class="percent-input">
+            <span>Ásia:</span>
+            <input type="number" id="asia" name="Ásia (%)" min="0" max="100" />
+            <span>%</span>
+          </div>
+
+          <div class="percent-input">
+            <span>Médio Oriente:</span>
+            <input type="number" id="medioOriente" name="Médio Oriente (%)" min="0" max="100" />
+            <span>%</span>
+          </div>
+        </div>
+
+        <!-- 7. Tipologia de serviços -->
+        <div class="field-group">
+          <h2>7. Tipologia de serviços oferecidos (assinale os que se aplicam)</h2>
+          <small>Se possível, indique a percentagem aproximada de peso no negócio.</small>
+          <div class="checkbox-group">
+            <div class="checkbox-option">
+              <input type="checkbox" id="servViagensMedida" name="Viagens à medida / Individuais (tem)" />
+              <label for="servViagensMedida">% Viagens à medida / Individuais</label>
+            </div>
+            <div class="percent-input">
+              <input type="number" id="pctViagensMedida" name="Viagens à medida / Individuais (%)" min="0" max="100" />
+              <span>%</span>
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-option">
+              <input type="checkbox" id="servPacotes" name="Pacotes e produtos combinados (tem)" />
+              <label for="servPacotes">% Pacotes e produtos combinados</label>
+            </div>
+            <div class="percent-input">
+              <input type="number" id="pctPacotes" name="Pacotes e produtos combinados (%)" min="0" max="100" />
+              <span>%</span>
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-option">
+              <input type="checkbox" id="servAereo" name="Venda de bilhetes aéreos (tem)" />
+              <label for="servAereo">% Venda de bilhetes aéreos</label>
+            </div>
+            <div class="percent-input">
+              <input type="number" id="pctAereo" name="Venda de bilhetes aéreos (%)" min="0" max="100" />
+              <span>%</span>
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-option">
+              <input type="checkbox" id="servGrupos" name="Grupos (tem)" />
+              <label for="servGrupos">% Grupos</label>
+            </div>
+            <div class="percent-input">
+              <input type="number" id="pctGrupos" name="Grupos (%)" min="0" max="100" />
+              <span>%</span>
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-option">
+              <input type="checkbox" id="servOutros" name="Outros serviços (tem)" />
+              <label for="servOutros">% Outros</label>
+            </div>
+            <div class="percent-input">
+              <input type="number" id="pctOutros" name="Outros serviços (%)" min="0" max="100" />
+              <span>%</span>
+            </div>
+          </div>
+
+          <label for="descricaoOutros">Se assinalou "Outros", indique quais:</label>
+          <textarea id="descricaoOutros" name="Descrição de outros serviços"></textarea>
+        </div>
+
+        <!-- 8. Perfil predominante dos clientes -->
+        <div class="field-group">
+          <h2>8. Perfil predominante dos seus clientes</h2>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="Perfil predominante de clientes" value="Particulares" />
+              <span>Particulares</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="Perfil predominante de clientes" value="Empresariais (corporate)" />
+              <span>Empresariais (corporate)</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="Perfil predominante de clientes" value="Misto" />
+              <span>Misto (particulares e empresariais)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 9. Principais fornecedores de hotelaria -->
+        <div class="field-group">
+          <h2>9. Quais são atualmente os seus principais fornecedores de hotelaria ou que procura mais habitualmente (caso já utilize ou tenha reservado)?</h2>
+          <small>Indique bedbanks, centrais de reservas, cadeias hoteleiras, etc.</small>
+          <textarea
+            id="fornecedoresHotelaria"
+            name="Principais fornecedores de hotelaria"
+            required
+          ></textarea>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit">
+            Enviar respostas
+          </button>
+          <span>Os dados são enviados de forma segura através do Formspree.</span>
+        </div>
+
+        <p id="statusMessage" class="status-message"></p>
+
+        <p class="footer-note">
+          Nota: Este formulário é meramente indicativo. Os dados recolhidos serão utilizados apenas para efeitos
+          de relacionamento comercial com a Restel Travel.
+        </p>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const form = document.getElementById("questionario-agencia");
+      const statusMessage = document.getElementById("statusMessage");
+
+      // 🔴 SUBSTITUA A URL PELO SEU ENDPOINT REAL DO FORMSPREE
+      // Exemplo: "https://formspree.io/f/abcdxyz1"
+      const FORMSPREE_ENDPOINT = "https://formspree.io/f/myzrjdqg";
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        statusMessage.style.display = "none";
+        statusMessage.textContent = "";
+
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch(FORMSPREE_ENDPOINT, {
+            method: "POST",
+            body: formData,
+            headers: {
+              "Accept": "application/json"
+            }
+          });
+
+          if (response.ok) {
+            statusMessage.textContent = "Obrigado! As suas respostas foram enviadas com sucesso.";
+            statusMessage.className = "status-message status-success";
+            statusMessage.style.display = "block";
+            form.reset();
+          } else {
+            statusMessage.textContent = "Ocorreu um erro ao enviar o formulário. Por favor, tente novamente mais tarde.";
+            statusMessage.className = "status-message status-error";
+            statusMessage.style.display = "block";
+          }
+        } catch (error) {
+          statusMessage.textContent = "Não foi possível enviar o formulário. Verifique a sua ligação ou tente mais tarde.";
+          statusMessage.className = "status-message status-error";
+          statusMessage.style.display = "block";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
